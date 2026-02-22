@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dev-dist/
+*.local
+.env
+.env.*
+*.tsbuildinfo
+.vite/
+sw.js
+workbox-*.js
+.claude/

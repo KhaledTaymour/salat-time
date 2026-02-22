@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'Noto Sans Arabic', ui-sans-serif, sans-serif;
+
+  /* Updated by useGradient hook every 30s */
+  --gradient-from: #1e1b4b;
+  --gradient-via: #312e81;
+  --gradient-to: #1e1b4b;
+
+  --color-accent: oklch(0.7 0.2 270);
+  --color-glass: oklch(1 0 0 / 0.05);
+  --color-glass-border: oklch(1 0 0 / 0.1);
+}
+
+/* Prevent flash of unstyled content */
+html {
+  background-color: #0f172a;
+}
+
+[dir="rtl"] {
+  font-family: var(--font-arabic), var(--font-sans);
+}
+
+.gradient-bg {
+  background: linear-gradient(
+    to bottom,
+    var(--gradient-from),
+    var(--gradient-via, var(--gradient-from)),
+    var(--gradient-to)
+  );
+  transition: background 2s ease;
+}
+
+/* Glass morphism utility */
+.glass {
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Noise texture overlay for visual depth */
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Countdown digit animation container */
+.digit-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Smooth scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(1 0 0 / 0.2) transparent;
+}
+
+/* RTL-aware transitions */
+[dir="rtl"] .slide-in {
+  --slide-from: -100%;
+}
+[dir="ltr"] .slide-in {
+  --slide-from: 100%;
+}
