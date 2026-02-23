@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { reverseGeocode } from '@/api/aladhan';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { suggestMethod } from '@/utils/calculations';
@@ -10,7 +10,6 @@ export function useLocation() {
   const setMethod = useSettingsStore((s) => s.setMethod);
   const [status, setStatus] = useState<LocationStatus>('idle');
   const [error, setError] = useState<string | null>(null);
-  const hasAttempted = useRef(false);
 
   const detect = () => {
     if (!navigator.geolocation) {
@@ -69,12 +68,9 @@ export function useLocation() {
     );
   };
 
-  // Auto-detect on first mount if no stored location
+  // Restore status if location already persisted
   useEffect(() => {
-    if (!hasAttempted.current && location === null) {
-      hasAttempted.current = true;
-      detect();
-    } else if (location !== null) {
+    if (location !== null) {
       setStatus('detected');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
