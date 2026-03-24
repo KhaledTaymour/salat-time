@@ -20,6 +20,21 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
+            src: '/icons/apple-touch-icon-152x152.png',
+            sizes: '152x152',
+            type: 'image/png'
+          },
+          {
+            src: '/icons/apple-touch-icon-167x167.png',
+            sizes: '167x167',
+            type: 'image/png'
+          },
+          {
+            src: '/icons/apple-touch-icon-180x180.png',
+            sizes: '180x180',
+            type: 'image/png'
+          },
+          {
             src: '/icons/pwa-192x192.png',
             sizes: '192x192',
             type: 'image/png'

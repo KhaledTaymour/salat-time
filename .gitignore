@@ -9,3 +9,4 @@ dev-dist/
 sw.js
 workbox-*.js
 .claude/
+.playwright-mcp/
